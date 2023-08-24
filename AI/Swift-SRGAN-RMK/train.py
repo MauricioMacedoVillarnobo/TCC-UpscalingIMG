@@ -178,7 +178,7 @@ def main(opt):
             val_images = torch.chunk(val_images, val_images.size(0) // 15)
             val_save_bar = tqdm(val_images, desc="[saving training results]")
             index = 1
-            out_path = "logs/abacates"
+            out_path = "logs/"
             for image in val_save_bar:
                 image = torchvision.utils.make_grid(image, nrow=3, padding=5)
                 torchvision.utils.save_image(
