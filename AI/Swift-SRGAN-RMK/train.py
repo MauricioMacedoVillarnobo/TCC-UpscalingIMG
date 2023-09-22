@@ -176,7 +176,8 @@ def main(opt):
                 )
             val_images = torch.stack(val_images)
             val_images = torch.chunk(val_images, val_images.size(0) // 15)
-            val_save_bar = tqdm(val_images, desc="[saving training results]")
+
+            val_save_bar = tqdm(val_images[-1], desc="[saving training results]")
             index = 1
             out_path = "logs/"
             for image in val_save_bar:
@@ -187,6 +188,7 @@ def main(opt):
                     padding=5,
                 )
                 index += 1
+
 
         # save model parameters
         netG.train()
