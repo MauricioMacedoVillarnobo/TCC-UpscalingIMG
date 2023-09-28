@@ -87,7 +87,7 @@ class Generator(nn.Module):
         torch.Tensor: super resolution image
     """
 
-    def __init__(self, in_channels: int = 3, num_channels: int = 64, num_blocks: int = 16, upscale_factor: int = 4):
+    def __init__(self, in_channels: int = 3, num_channels: int = 64, num_blocks: int = 12, upscale_factor: int = 4):
         super(Generator, self).__init__()
         
         self.initial = ConvBlock(in_channels, num_channels, kernel_size=9, stride=1, padding=4, use_bn=False)
