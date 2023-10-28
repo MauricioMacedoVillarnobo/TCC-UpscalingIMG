@@ -60,15 +60,15 @@ def main(opt):
     image = image.unsqueeze(0)
     image = image.cuda()
     
-    # Start timer
-    start_time = time.time()
+    start = torch.cuda.Event(enable_timing=True)
+    end = torch.cuda.Event(enable_timing=True)
+
+    start.record()
     resultado = model(image)
-    # End timer
-    end_time = time.time()
-    
-    # Calculate elapsed time
-    elapsed_time = end_time - start_time
-    print("Elapsed time: ", elapsed_time) 
+    end.record()
+    # Waits for everything to finish running
+    torch.cuda.synchronize()
+    print(start.elapsed_time(end))
     
     #resultado = display_transform(resultado.squeeze(0))
     torchvision.utils.save_image(
