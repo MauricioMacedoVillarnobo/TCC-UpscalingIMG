@@ -59,7 +59,8 @@ class ResidualBlock(nn.Module):
             in_channels,
             kernel_size=3,
             stride=1,
-            padding=1
+            padding=1,
+            use_bn=False
         )
         self.block2 = ConvBlock(
             in_channels,
@@ -67,7 +68,8 @@ class ResidualBlock(nn.Module):
             kernel_size=3,
             stride=1,
             padding=1,
-            use_act=False
+            use_act=False,
+            use_bn=False
         )
         
     def forward(self, x):
@@ -87,12 +89,18 @@ class Generator(nn.Module):
         torch.Tensor: super resolution image
     """
 
-    def __init__(self, in_channels: int = 3, num_channels: int = 64, num_blocks: int = 16, upscale_factor: int = 4):
+    def __init__(self, in_channels: int = 3, num_channels: int = 64, num_blocks: int = 18, upscale_factor: int = 4):
         super(Generator, self).__init__()
         
         self.initial = ConvBlock(in_channels, num_channels, kernel_size=9, stride=1, padding=4, use_bn=False)
-        self.residual = nn.Sequential(
-            *[ResidualBlock(num_channels) for _ in range(num_blocks)]
+        self.residual1 = nn.Sequential(
+            *[ResidualBlock(num_channels) for _ in range(3)]
+        )
+        self.residual2 = nn.Sequential(
+            *[ResidualBlock(num_channels) for _ in range(3)]
+        )
+        self.residual3 = nn.Sequential(
+            *[ResidualBlock(num_channels) for _ in range(3)]
         )
         self.convblock = ConvBlock(num_channels, num_channels, kernel_size=3, stride=1, padding=1, use_act=False)
         self.upsampler = nn.Sequential(
@@ -102,7 +110,7 @@ class Generator(nn.Module):
         
     def forward(self, x):
         initial = self.initial(x)
-        x = self.residual(initial)
+        x = self.residual3(self.residual2(self.residual1(initial)))
         x = self.convblock(x) + initial
         x = self.upsampler(x)
         return (torch.tanh(self.final_conv(x)) + 1) / 2
