@@ -46,7 +46,7 @@ def main(opt):
     mean = [0.4207, 0.4651, 0.3286]
     std = [0.2025, 0.1796, 0.1711]
     
-    model = torch.jit.load('./test/optimized_model.pt')
+    model = torch.jit.load('./test/optimized_model_different1.pt')
     model.eval() 
     
     image_transforms = transforms.transforms.Compose([
@@ -73,7 +73,7 @@ def main(opt):
     #resultado = display_transform(resultado.squeeze(0))
     torchvision.utils.save_image(
                     resultado,
-                    "./test/Upscaled/upscaledResult.png",
+                    "./test/Upscaled/upscaledResultDifferent1.png",
                     padding=5,
                )
     
