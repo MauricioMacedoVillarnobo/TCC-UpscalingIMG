@@ -74,7 +74,7 @@ def main(opt):
     end.record()
     # Waits for everything to finish running
     torch.cuda.synchronize()
-    print("Tempo que levou para escalonar imagem: "+str(start.elapsed_time(end))+" segundos.")
+    print("Tempo que levou para escalonar imagem: "+str(start.elapsed_time(end))+" milisegundos.")
     
     imageNameHR = input('Digite o nome da imagem ecalonada a ser salva na pasta Upscaled: (ex: upscaledResult.png)\n')
     
