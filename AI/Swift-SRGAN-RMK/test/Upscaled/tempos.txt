@@ -1,0 +1,12 @@
+4Blocks - 2581.88 ms
+8Blocks - 1198.40 ms
+12Blocks - 775.40 ms
+16Blocks - 846.65 ms
+20Blocks - 1193.64 ms
+24Blocks - 1812.54 ms
+28Blocks - 1887.79 ms
+32Blocks - NA
+36Blocks - 2375.61 ms
+DifferentBlockV1 - 717.90 ms
+DifferentBlockV1MoreBlocks - 742.00 ms
+OriginalPaper - 817.02 ms
