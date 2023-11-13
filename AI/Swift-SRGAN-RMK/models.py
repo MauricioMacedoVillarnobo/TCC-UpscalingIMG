@@ -105,6 +105,9 @@ class Generator(nn.Module):
         self.residual4 = nn.Sequential(
             *[ResidualBlock(num_channels) for _ in range(3)]
         )
+        self.residual5 = nn.Sequential(
+            *[ResidualBlock(num_channels) for _ in range(3)]
+        )
         self.convblock = ConvBlock(num_channels, num_channels, kernel_size=3, stride=1, padding=1, use_act=False)
         self.upsampler = nn.Sequential(
             *[UpsampleBlock(num_channels, scale_factor=2) for _ in range(upscale_factor//2)]
@@ -113,7 +116,7 @@ class Generator(nn.Module):
         
     def forward(self, x):
         initial = self.initial(x)
-        x = self.residual4(self.residual3(self.residual2(self.residual1(initial))))
+        x = self.residual5(self.residual4(self.residual3(self.residual2(self.residual1(initial)))))
         x = self.convblock(x) + initial
         x = self.upsampler(x)
         return (torch.tanh(self.final_conv(x)) + 1) / 2
