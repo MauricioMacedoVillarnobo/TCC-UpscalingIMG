@@ -5,8 +5,9 @@
 20Blocks - 1193.64 ms
 24Blocks - 1812.54 ms
 28Blocks - 1887.79 ms
-32Blocks - NA
+32Blocks - 2172.55 ms
 36Blocks - 2375.61 ms
 DifferentBlockV1 - 717.90 ms
 DifferentBlockV1MoreBlocks - 742.00 ms
+DifferentBlockV1EvenMoreBlocks - 1785.77 ms
 OriginalPaper - 817.02 ms
